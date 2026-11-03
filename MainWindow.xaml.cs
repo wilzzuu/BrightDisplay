@@ -13,6 +13,12 @@ namespace BrightDisplay;
 
 public partial class MainWindow : Window
 {
+    private const double WarmPresetTemperature = 2700;
+    private const double NeutralPresetTemperature = 4500;
+    private const double CoolPresetTemperature = 6500;
+    private const double WarmToNeutralRange = NeutralPresetTemperature - WarmPresetTemperature;
+    private const double NeutralToCoolRange = CoolPresetTemperature - NeutralPresetTemperature;
+
     private static readonly Color WarmColor = Color.FromRgb(255, 226, 189);
     private static readonly Color NeutralColor = Colors.White;
     private static readonly Color CoolColor = Color.FromRgb(230, 241, 255);
@@ -87,17 +93,22 @@ public partial class MainWindow : Window
 
     private void WarmPreset_Click(object sender, RoutedEventArgs e)
     {
-        TemperatureSlider.Value = 2700;
+        SetTemperaturePreset(WarmPresetTemperature);
     }
 
     private void NeutralPreset_Click(object sender, RoutedEventArgs e)
     {
-        TemperatureSlider.Value = 4500;
+        SetTemperaturePreset(NeutralPresetTemperature);
     }
 
     private void CoolPreset_Click(object sender, RoutedEventArgs e)
     {
-        TemperatureSlider.Value = 6500;
+        SetTemperaturePreset(CoolPresetTemperature);
+    }
+
+    private void SetTemperaturePreset(double temperature)
+    {
+        TemperatureSlider.Value = temperature;
     }
 
     private void BrightnessSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -133,9 +144,9 @@ public partial class MainWindow : Window
     private void UpdateDisplay()
     {
         var temperature = TemperatureSlider.Value;
-        var color = temperature <= 4500
-            ? Interpolate(WarmColor, NeutralColor, (temperature - 2700) / 1800)
-            : Interpolate(NeutralColor, CoolColor, (temperature - 4500) / 2000);
+        var color = temperature <= NeutralPresetTemperature
+            ? Interpolate(WarmColor, NeutralColor, (temperature - WarmPresetTemperature) / WarmToNeutralRange)
+            : Interpolate(NeutralColor, CoolColor, (temperature - NeutralPresetTemperature) / NeutralToCoolRange);
         var brightness = BrightnessSlider.Value / 100;
 
         DisplaySurface.Background = new SolidColorBrush(Color.FromRgb(

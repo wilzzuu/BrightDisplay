@@ -1,6 +1,15 @@
 # Prerequisites
 *.d
 
+# .NET / Visual Studio build outputs
+bin/
+obj/
+dist/
+.vs/
+[Bb]in/
+[Oo]bj/
+[Dd]ist/
+
 # Object files
 *.o
 *.ko
