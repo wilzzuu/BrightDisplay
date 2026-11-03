@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BrightDisplay")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0f00f7fe83fc9a006e2fd8256e1bf6df27be8fcf")]
 [assembly: System.Reflection.AssemblyProductAttribute("BrightDisplay")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BrightDisplay")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
